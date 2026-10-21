@@ -1,0 +1,21 @@
+
+name: Push CI
+on:
+  push:
+    branches:
+      - main
+      - dev
+      - 'feature/**'
+jobs:
+  test:
+    name: Run Python Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Set Up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run Tests
+        run: python -m unittest discover -s tests -v
